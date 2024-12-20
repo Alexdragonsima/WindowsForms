@@ -18,6 +18,7 @@ namespace Clock
 			labelTime.BackColor = Color.AliceBlue;
 
 			this.Location = new Point(Screen.PrimaryScreen.Bounds.Width - this.Width, 50);
+			SetVisibility(false);
 		}
 		void SetVisibility(bool visible)
 		{
@@ -60,7 +61,8 @@ namespace Clock
 			//this.FormBorderStyle = FormBorderStyle.None;
 			//labelTime.BackColor = Color.AliceBlue;
 			//this.ShowInTaskbar = false;
-			SetVisibility(false);
+
+			SetVisibility(cmShowControls.Checked = false);
 		}
 
 		private void labelTime_DoubleClick(object sender, EventArgs e)
@@ -81,7 +83,7 @@ namespace Clock
 			//labelTime.BackColor=Color.AliceBlue;
 			//this.ShowInTaskbar = true;
 
-			SetVisibility(true);
+			SetVisibility(cmShowControls.Checked = true);
 		}
 
 		private void cmExit_Click(object sender, EventArgs e)
@@ -115,16 +117,60 @@ namespace Clock
 
 		private void notifyIcon_DoubleClick(object sender, EventArgs e)
 		{
-			if(!this.TopMost)
+			if (!this.TopMost)
 			{
 				this.TopMost = true;
 				this.TopMost = false;
 			}
 		}
 
-		private void redToolStripMenuItem_Click(object sender, EventArgs e)
+		//private void redToolStripMenuItem_Click(object sender, EventArgs e)
+		//{
+		//	labelTime.BackColor = Color.Red;
+		//}
+
+		//private void blueToolStripMenuItem_Click(object sender, EventArgs e)
+		//{
+		//	labelTime.BackColor = Color.Blue;
+		//}
+
+		//private void blackToolStripMenuItem_Click(object sender, EventArgs e)
+		//{
+		//	labelTime.BackColor = Color.Black;
+		//}
+
+		//private void redToolStripMenuItem1_Click(object sender, EventArgs e)
+		//{
+		//	labelTime.ForeColor = Color.Red;
+		//}
+
+		//private void blackToolStripMenuItem1_Click(object sender, EventArgs e)
+		//{
+		//	labelTime.ForeColor = Color.Black;
+		//}
+
+		private void cmShowControls_CheckedChanged(object sender, EventArgs e)
 		{
-			labelTime.BackColor = Color.Red;
+			SetVisibility(cmShowControls.Checked);
+		}
+
+		private void SetColor(object sender, EventArgs e)
+		{
+			ColorDialog dialog = new ColorDialog();
+			switch ((sender as ToolStripMenuItem).Text)
+			{
+				case "Background color": dialog.Color = labelTime.BackColor; break;
+				case "Foreground color": dialog.Color = labelTime.ForeColor; break;
+			}
+			if (dialog.ShowDialog() == DialogResult.OK)
+			{
+				switch ((sender as ToolStripMenuItem).Text)	//as - это оператор прелбразования типа
+					//оператор as  значение слева приводит к типу с справа
+				{
+					case "Background color": labelTime.BackColor = dialog.Color; break;
+					case "Foreground color": labelTime.ForeColor = dialog.Color; break;
+				}
+			}
 		}
 	}
 }
