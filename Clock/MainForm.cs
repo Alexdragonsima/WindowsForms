@@ -8,12 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.IO;
+using System.Diagnostics;
 
 namespace Clock
 {
 	public partial class MainForm : Form
 	{
-		ChooseFontForm fontDialog=null;
+		ChooseFontForm fontDialog = null;
 
 		public MainForm()
 		{
@@ -26,8 +28,8 @@ namespace Clock
 			SetVisibility(false);
 
 			cmShowConsole.Checked = true;
-			fontDialog = new ChooseFontForm();
-			fontDialog.Location = new Point(this.Location.X - fontDialog.Width);
+			LoadSettings();
+			//fontDialog = new ChooseFontForm();
 		}
 		void SetVisibility(bool visible)
 		{
@@ -38,6 +40,40 @@ namespace Clock
 			this.TransparencyKey = visible ? Color.Empty : this.BackColor;
 			this.FormBorderStyle = visible ? FormBorderStyle.FixedToolWindow : FormBorderStyle.None;
 			this.ShowInTaskbar = visible;
+		}
+
+		void SaveSettings()
+		{
+			StreamWriter sw = new StreamWriter("Settings.ini");
+			sw.WriteLine($"{cmTopmost.Checked}");
+			sw.WriteLine($"{cmShowControls.Checked}");
+			sw.WriteLine($"{cmShowDate.Checked}");
+			sw.WriteLine($"{cmShowWeekday.Checked}");
+			sw.WriteLine($"{cmShowConsole.Checked}");
+			sw.WriteLine($"{labelTime.BackColor.ToArgb()}");
+			sw.WriteLine($"{labelTime.ForeColor.ToArgb()}");
+			sw.WriteLine($"{fontDialog.Filename}");
+			sw.WriteLine($"{labelTime.Font.Size}");
+			sw.Close();
+			Process.Start("notepad", "Settings.ini");
+		}
+
+		void LoadSettings()
+		{
+			Directory.SetCurrentDirectory("..\\..\\Fonts");
+			StreamReader sr = new StreamReader("Settings.ini");
+			cmTopmost.Checked = bool.Parse(sr.ReadLine());
+			cmShowControls.Checked = bool.Parse(sr.ReadLine());
+			cmShowDate.Checked = bool.Parse(sr.ReadLine());
+			cmShowWeekday.Checked = bool.Parse(sr.ReadLine());
+			cmShowConsole.Checked = bool.Parse(sr.ReadLine());
+			labelTime.BackColor = Color.FromArgb(Convert.ToInt32(sr.ReadLine()));
+			labelTime.ForeColor = Color.FromArgb(Convert.ToInt32(sr.ReadLine()));
+			string font_name = sr.ReadLine();
+			int font_size = (int)Convert.ToDouble(sr.ReadLine());
+			sr.Close();
+			fontDialog = new ChooseFontForm(font_name, font_size);
+			labelTime.Font = fontDialog.Font;
 		}
 
 		private void timer_Tick(object sender, EventArgs e)
@@ -173,8 +209,8 @@ namespace Clock
 			}
 			if (dialog.ShowDialog() == DialogResult.OK)
 			{
-				switch ((sender as ToolStripMenuItem).Text)	//as - это оператор прелбразования типа
-					//оператор as  значение слева приводит к типу с справа
+				switch ((sender as ToolStripMenuItem).Text) //as - это оператор прелбразования типа
+															//оператор as  значение слева приводит к типу с справа
 				{
 					case "Background color": labelTime.BackColor = dialog.Color; break;
 					case "Foreground color": labelTime.ForeColor = dialog.Color; break;
@@ -199,5 +235,10 @@ namespace Clock
 		public static extern bool AllocConsole();
 		[DllImport("kernel32.dll")]
 		public static extern bool FreeConsole();
+
+		private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			SaveSettings();
+		}
 	}
 }
