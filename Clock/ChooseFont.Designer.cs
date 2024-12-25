@@ -36,6 +36,7 @@
 			this.labelExample = new System.Windows.Forms.Label();
 			this.btnOK = new System.Windows.Forms.Button();
 			this.btnCancel = new System.Windows.Forms.Button();
+			this.btnApply = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.numFontSize)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -47,12 +48,23 @@
 			this.cbFonts.Name = "cbFonts";
 			this.cbFonts.Size = new System.Drawing.Size(256, 21);
 			this.cbFonts.TabIndex = 0;
+			this.cbFonts.SelectedIndexChanged += new System.EventHandler(this.cbFonts_SelectedIndexChanged);
 			// 
 			// numFontSize
 			// 
 			this.numFontSize.Location = new System.Drawing.Point(271, 19);
+			this.numFontSize.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+			this.numFontSize.Minimum = new decimal(new int[] {
+            24,
+            0,
+            0,
+            0});
 			this.numFontSize.Name = "numFontSize";
-			this.numFontSize.Size = new System.Drawing.Size(50, 20);
+			this.numFontSize.Size = new System.Drawing.Size(75, 20);
 			this.numFontSize.TabIndex = 1;
 			this.numFontSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numFontSize.Value = new decimal(new int[] {
@@ -98,6 +110,7 @@
 			this.btnOK.TabIndex = 5;
 			this.btnOK.Text = "OK";
 			this.btnOK.UseVisualStyleBackColor = true;
+			this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
 			// 
 			// btnCancel
 			// 
@@ -109,11 +122,22 @@
 			this.btnCancel.Text = "Cancel";
 			this.btnCancel.UseVisualStyleBackColor = true;
 			// 
+			// btnApply
+			// 
+			this.btnApply.Location = new System.Drawing.Point(271, 45);
+			this.btnApply.Name = "btnApply";
+			this.btnApply.Size = new System.Drawing.Size(75, 23);
+			this.btnApply.TabIndex = 7;
+			this.btnApply.Text = "Apply";
+			this.btnApply.UseVisualStyleBackColor = true;
+			this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
+			// 
 			// ChooseFontForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(329, 207);
+			this.ClientSize = new System.Drawing.Size(366, 207);
+			this.Controls.Add(this.btnApply);
 			this.Controls.Add(this.btnCancel);
 			this.Controls.Add(this.btnOK);
 			this.Controls.Add(this.labelExample);
@@ -140,5 +164,6 @@
 		private System.Windows.Forms.Label labelExample;
 		private System.Windows.Forms.Button btnOK;
 		private System.Windows.Forms.Button btnCancel;
+		private System.Windows.Forms.Button btnApply;
 	}
 }
