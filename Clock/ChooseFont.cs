@@ -16,10 +16,10 @@ namespace Clock
 	{
 		public Font Font { get; set; }
 		public string Filename { get; set; }
-
 		public ChooseFontForm()
 		{
 			InitializeComponent();
+
 			LoadFonts();
 			cbFonts.SelectedIndex = 0;
 		}
