@@ -74,7 +74,7 @@ namespace Clock
 			string font_name = sr.ReadLine();
 			int font_size = (int)Convert.ToDouble(sr.ReadLine());
 			sr.Close();
-			fontDialog = new ChooseFontForm(font_name, font_size);
+			fontDialog = new ChooseFontForm(this, font_name, font_size);
 			labelTime.Font = fontDialog.Font;
 		}
 
@@ -204,6 +204,7 @@ namespace Clock
 		private void SetColor(object sender, EventArgs e)
 		{
 			ColorDialog dialog = new ColorDialog();
+			
 			switch ((sender as ToolStripMenuItem).Text)
 			{
 				case "Background color": dialog.Color = labelTime.BackColor; break;

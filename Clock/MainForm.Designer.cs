@@ -48,6 +48,7 @@
 			this.btnHideControls = new System.Windows.Forms.Button();
 			this.cbShowWeekDay = new System.Windows.Forms.CheckBox();
 			this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+			this.alarmsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.contextMenu.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -77,9 +78,10 @@
             this.cmChooseFont,
             this.cmColors,
             this.cmLoadOnWinStartup,
+            this.alarmsToolStripMenuItem,
             this.cmExit});
 			this.contextMenu.Name = "contextMenu";
-			this.contextMenu.Size = new System.Drawing.Size(208, 202);
+			this.contextMenu.Size = new System.Drawing.Size(208, 246);
 			// 
 			// cmTopmost
 			// 
@@ -216,6 +218,12 @@
 			this.notifyIcon.Visible = true;
 			this.notifyIcon.DoubleClick += new System.EventHandler(this.notifyIcon_DoubleClick);
 			// 
+			// alarmsToolStripMenuItem
+			// 
+			this.alarmsToolStripMenuItem.Name = "alarmsToolStripMenuItem";
+			this.alarmsToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+			this.alarmsToolStripMenuItem.Text = "Alarms";
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -260,6 +268,7 @@
 		private System.Windows.Forms.ToolStripMenuItem cmChooseFont;
 		private System.Windows.Forms.ToolStripMenuItem cmShowConsole;
 		private System.Windows.Forms.ToolStripMenuItem cmLoadOnWinStartup;
+		private System.Windows.Forms.ToolStripMenuItem alarmsToolStripMenuItem;
 	}
 }
 
