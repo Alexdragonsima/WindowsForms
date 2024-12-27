@@ -42,13 +42,17 @@
 			this.cmBackColor = new System.Windows.Forms.ToolStripMenuItem();
 			this.cmForeColor = new System.Windows.Forms.ToolStripMenuItem();
 			this.cmLoadOnWinStartup = new System.Windows.Forms.ToolStripMenuItem();
+			this.cmAlarms = new System.Windows.Forms.ToolStripMenuItem();
 			this.cmExit = new System.Windows.Forms.ToolStripMenuItem();
 			this.timer = new System.Windows.Forms.Timer(this.components);
 			this.cbShowDate = new System.Windows.Forms.CheckBox();
 			this.btnHideControls = new System.Windows.Forms.Button();
 			this.cbShowWeekDay = new System.Windows.Forms.CheckBox();
 			this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
-			this.alarmsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+			this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
 			this.contextMenu.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -72,16 +76,20 @@
 			this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cmTopmost,
             this.cmShowControls,
+            this.toolStripSeparator1,
             this.cmShowDate,
             this.cmShowWeekday,
             this.cmShowConsole,
+            this.toolStripSeparator2,
             this.cmChooseFont,
             this.cmColors,
+            this.toolStripSeparator3,
+            this.cmAlarms,
+            this.toolStripSeparator4,
             this.cmLoadOnWinStartup,
-            this.alarmsToolStripMenuItem,
             this.cmExit});
 			this.contextMenu.Name = "contextMenu";
-			this.contextMenu.Size = new System.Drawing.Size(208, 246);
+			this.contextMenu.Size = new System.Drawing.Size(208, 270);
 			// 
 			// cmTopmost
 			// 
@@ -144,14 +152,14 @@
 			// cmBackColor
 			// 
 			this.cmBackColor.Name = "cmBackColor";
-			this.cmBackColor.Size = new System.Drawing.Size(168, 22);
+			this.cmBackColor.Size = new System.Drawing.Size(180, 22);
 			this.cmBackColor.Text = "Background color";
 			this.cmBackColor.Click += new System.EventHandler(this.SetColor);
 			// 
 			// cmForeColor
 			// 
 			this.cmForeColor.Name = "cmForeColor";
-			this.cmForeColor.Size = new System.Drawing.Size(168, 22);
+			this.cmForeColor.Size = new System.Drawing.Size(180, 22);
 			this.cmForeColor.Text = "Foreground color";
 			this.cmForeColor.Click += new System.EventHandler(this.SetColor);
 			// 
@@ -162,6 +170,13 @@
 			this.cmLoadOnWinStartup.Size = new System.Drawing.Size(207, 22);
 			this.cmLoadOnWinStartup.Text = "Load on windows startup";
 			this.cmLoadOnWinStartup.CheckedChanged += new System.EventHandler(this.cmLoadOnWinStartup_CheckedChanged);
+			// 
+			// cmAlarms
+			// 
+			this.cmAlarms.Name = "cmAlarms";
+			this.cmAlarms.Size = new System.Drawing.Size(207, 22);
+			this.cmAlarms.Text = "Alarms";
+			this.cmAlarms.Click += new System.EventHandler(this.cmAlarm_Click);
 			// 
 			// cmExit
 			// 
@@ -218,11 +233,25 @@
 			this.notifyIcon.Visible = true;
 			this.notifyIcon.DoubleClick += new System.EventHandler(this.notifyIcon_DoubleClick);
 			// 
-			// alarmsToolStripMenuItem
+			// toolStripSeparator1
 			// 
-			this.alarmsToolStripMenuItem.Name = "alarmsToolStripMenuItem";
-			this.alarmsToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
-			this.alarmsToolStripMenuItem.Text = "Alarms";
+			this.toolStripSeparator1.Name = "toolStripSeparator1";
+			this.toolStripSeparator1.Size = new System.Drawing.Size(204, 6);
+			// 
+			// toolStripSeparator2
+			// 
+			this.toolStripSeparator2.Name = "toolStripSeparator2";
+			this.toolStripSeparator2.Size = new System.Drawing.Size(204, 6);
+			// 
+			// toolStripSeparator3
+			// 
+			this.toolStripSeparator3.Name = "toolStripSeparator3";
+			this.toolStripSeparator3.Size = new System.Drawing.Size(204, 6);
+			// 
+			// toolStripSeparator4
+			// 
+			this.toolStripSeparator4.Name = "toolStripSeparator4";
+			this.toolStripSeparator4.Size = new System.Drawing.Size(204, 6);
 			// 
 			// MainForm
 			// 
@@ -268,7 +297,11 @@
 		private System.Windows.Forms.ToolStripMenuItem cmChooseFont;
 		private System.Windows.Forms.ToolStripMenuItem cmShowConsole;
 		private System.Windows.Forms.ToolStripMenuItem cmLoadOnWinStartup;
-		private System.Windows.Forms.ToolStripMenuItem alarmsToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem cmAlarms;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
 	}
 }
 
