@@ -14,6 +14,10 @@ namespace Clock
 	{
 		AddAlarmForm addAlarm = null;
 		OpenFileDialog openFile = null;
+		public ListBox LB_Alarms
+		{
+			get => lbAlarms;
+		}
 
 		public AlarmsForm()
 		{
@@ -26,8 +30,8 @@ namespace Clock
 		{
 			addAlarm.StartPosition = FormStartPosition.Manual;
 			addAlarm.Location = new Point(this.Location.X + 25, this.Location.Y + 25);
-			DialogResult result= addAlarm.ShowDialog();
-			if(result==DialogResult.OK)
+			DialogResult result = addAlarm.ShowDialog();
+			if (result == DialogResult.OK)
 			{
 				lbAlarms.Items.Add(addAlarm.Alarm);
 			}

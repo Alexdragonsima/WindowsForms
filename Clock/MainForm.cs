@@ -18,6 +18,7 @@ namespace Clock
 	{
 		ChooseFontForm fontDialog = null;
 		AlarmsForm alarms = null;
+		Alarm nextAlarm = null;
 
 		public MainForm()
 		{
@@ -34,6 +35,10 @@ namespace Clock
 			//fontDialog = new ChooseFontForm();
 			alarms = new AlarmsForm();
 		}
+		//void CompareAlarmsDEBUG()
+		//{
+		//	ala
+		//}
 		void SetVisibility(bool visible)
 		{
 			cbShowDate.Visible = visible;
@@ -98,6 +103,9 @@ namespace Clock
 				labelTime.Text += DateTime.Now.DayOfWeek;
 			}
 			notifyIcon.Text = labelTime.Text;
+
+			if(alarms.LB_Alarms.Items.Count>0)nextAlarm = alarms.LB_Alarms.Items.Cast<Alarm>().ToArray().Min();
+			if (nextAlarm != null) Console.WriteLine(nextAlarm);
 		}
 
 
