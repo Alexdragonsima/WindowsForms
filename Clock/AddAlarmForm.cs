@@ -27,7 +27,7 @@ namespace Clock
 		{
 			dtpDate.Enabled = cbUseDate.Checked;
 		}
-		
+
 		private void btnOK_Click(object sender, EventArgs e)
 		{
 			this.DialogResult = DialogResult.OK;
@@ -53,7 +53,7 @@ namespace Clock
 
 		private void btnFile_Click(object sender, EventArgs e)
 		{
-			if(open.ShowDialog()==DialogResult.OK)
+			if (open.ShowDialog() == DialogResult.OK)
 			{
 				lblAlarmFile.Text = open.FileName;
 			}
