@@ -11,6 +11,7 @@ using System.Runtime.InteropServices;
 using System.IO;
 using System.Diagnostics;
 using Microsoft.Win32;
+using System.Runtime.CompilerServices;
 
 namespace Clock
 {
@@ -34,6 +35,8 @@ namespace Clock
 			LoadSettings();
 			//fontDialog = new ChooseFontForm();
 			alarms = new AlarmsForm();
+            Console.WriteLine(DateTime.MinValue);
+			axWindowsMediaPlayer.Visible = false;
 		}
 		//void CompareAlarmsDEBUG()
 		//{
@@ -90,6 +93,14 @@ namespace Clock
 			return actualAlarms.Min();
 		}
 
+		void PlayAlarm()
+		{
+			axWindowsMediaPlayer.URL = nextAlarm.Filename;
+			axWindowsMediaPlayer.settings.volume = 100;
+			axWindowsMediaPlayer.Ctlcontrols.play();
+			axWindowsMediaPlayer.Visible = true;
+		}
+
 		private void timer_Tick(object sender, EventArgs e)
 		{
 			labelTime.Text = DateTime.Now.ToString
@@ -117,7 +128,8 @@ namespace Clock
 				)
 			{
 				System.Threading.Thread.Sleep(1000);
-				MessageBox.Show(this, nextAlarm.ToString(), "Alarm", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				PlayAlarm();
+				//MessageBox.Show(this, nextAlarm.ToString(), "Alarm", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				nextAlarm = null;
 			}
 
