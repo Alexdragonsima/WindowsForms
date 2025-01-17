@@ -65,7 +65,7 @@
 			// 
 			// dtpTime
 			// 
-			this.dtpTime.CustomFormat = "hh:mm:ss ";
+			this.dtpTime.CustomFormat = "HH:mm:ss ";
 			this.dtpTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.dtpTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
 			this.dtpTime.Location = new System.Drawing.Point(175, 49);
