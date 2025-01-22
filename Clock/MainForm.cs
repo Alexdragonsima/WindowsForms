@@ -34,8 +34,10 @@ namespace Clock
 
 			cmShowConsole.Checked = true;
 			LoadSettings();
+			Console.WriteLine(new DateTime());
 			//fontDialog = new ChooseFontForm();
 			alarms = new AlarmsForm();
+			LoadAlarms();
 			Console.WriteLine(DateTime.MinValue);
 			axWindowsMediaPlayer.Visible = false;
 		}
@@ -88,6 +90,42 @@ namespace Clock
 			fontDialog = new ChooseFontForm(this, font_name, font_size);
 			labelTime.Font = fontDialog.Font;
 		}
+		void SaveAlarms()
+		{
+			string execution_path = Path.GetDirectoryName(Application.ExecutablePath);
+			string filename = $"{execution_path}\\..\\..\\Fonts\\Alarms.ini";
+			StreamWriter sw = new StreamWriter(filename);
+			for (int i = 0; i < alarms.LB_Alarms.Items.Count; i++)
+			{
+				sw.WriteLine((alarms.LB_Alarms.Items[i] as Alarm).ToFileString());
+			}
+			sw.Close();
+			Process.Start("notepad", filename);
+		}
+		void LoadAlarms()
+		{
+			string execution_path = Path.GetDirectoryName(Application.ExecutablePath);
+			string filename = $"{execution_path}\\..\\..\\Fonts\\Alarms.ini";
+			StreamReader sr = new StreamReader(filename);
+			while (!sr.EndOfStream)
+			{
+				string s_alarm = sr.ReadLine();
+				string[] s_alarm_parts = s_alarm.Split(',');
+				for (int i = 0; i < s_alarm_parts.Length; i++)
+					Console.WriteLine(s_alarm_parts[i] + '\t');
+				Console.WriteLine();
+				Alarm alarm = new Alarm
+					(
+						s_alarm_parts[0] == "" ? new DateTime() : new DateTime(Convert.ToInt64(s_alarm_parts[0])),
+						new TimeSpan(Convert.ToInt64(s_alarm_parts[1])),
+						new Week(Convert.ToByte(s_alarm_parts[2])),
+						s_alarm_parts[3],
+						s_alarm_parts[4]
+					);
+				alarms.LB_Alarms.Items.Add(alarm);
+			}
+			sr.Close();
+		}
 		Alarm FindNextAlarm()
 		{
 			Alarm[] actualAlarms = alarms.LB_Alarms.Items.Cast<Alarm>().Where(a => a.Time > DateTime.Now.TimeOfDay).ToArray();
@@ -105,7 +143,7 @@ namespace Clock
 			axWindowsMediaPlayer.Ctlcontrols.play();
 			axWindowsMediaPlayer.Visible = true;
 		}
-		void SetPlayerInvisible(object sender,AxWMPLib._WMPOCXEvents_PlayStateChangeEvent e)
+		void SetPlayerInvisible(object sender, AxWMPLib._WMPOCXEvents_PlayStateChangeEvent e)
 		{
 			if (
 				axWindowsMediaPlayer.playState == WMPLib.WMPPlayState.wmppsMediaEnded ||
@@ -300,6 +338,7 @@ namespace Clock
 		private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
 		{
 			SaveSettings();
+			SaveAlarms();
 		}
 
 		private void cmLoadOnWinStartup_CheckedChanged(object sender, EventArgs e)
