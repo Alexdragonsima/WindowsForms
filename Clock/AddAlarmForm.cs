@@ -26,6 +26,7 @@ namespace Clock
 		private void cbUseDate_CheckedChanged(object sender, EventArgs e)
 		{
 			dtpDate.Enabled = cbUseDate.Checked;
+			clbWeekDays.Enabled = !cbUseDate.Checked;
 		}
 		void SetWeekDays(bool[] week)
 		{
@@ -79,3 +80,4 @@ namespace Clock
 		}
 	}
 }
+

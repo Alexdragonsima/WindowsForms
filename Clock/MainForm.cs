@@ -35,7 +35,7 @@ namespace Clock
 			LoadSettings();
 			//fontDialog = new ChooseFontForm();
 			alarms = new AlarmsForm();
-            Console.WriteLine(DateTime.MinValue);
+			Console.WriteLine(DateTime.MinValue);
 			axWindowsMediaPlayer.Visible = false;
 		}
 		//void CompareAlarmsDEBUG()
@@ -92,6 +92,10 @@ namespace Clock
 			Alarm[] actualAlarms = alarms.LB_Alarms.Items.Cast<Alarm>().Where(a => a.Time > DateTime.Now.TimeOfDay).ToArray();
 			return actualAlarms.Min();
 		}
+		bool CompareDates(DateTime date1, DateTime date2)
+		{
+			return date1.Year == date2.Year && date1.Month == date2.Month && date1.Day == date2.Day;
+		}
 
 		void PlayAlarm()
 		{
@@ -122,6 +126,12 @@ namespace Clock
 
 			if (
 				nextAlarm != null &&
+				(
+					nextAlarm.Date == DateTime.MinValue ?
+					nextAlarm.Weekdays.Contains(DateTime.Now.DayOfWeek) :
+					CompareDates(nextAlarm.Date, DateTime.Now)
+				) &&
+				//nextAlarm.Weekdays.Contains(DateTime.Now.DayOfWeek) &&
 				nextAlarm.Time.Hours == DateTime.Now.Hour &&
 				nextAlarm.Time.Minutes == DateTime.Now.Minute &&
 				nextAlarm.Time.Seconds == DateTime.Now.Second

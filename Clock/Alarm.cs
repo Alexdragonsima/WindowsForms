@@ -26,7 +26,7 @@ namespace Clock
 			this.Weekdays = week;
 			this.Filename = filename;
 			this.Message = message;
-            Console.WriteLine($"Constructor:{this.GetHashCode()}");
+			Console.WriteLine($"Constructor:{this.GetHashCode()}");
 		}
 		public Alarm(Alarm other)
 		{
@@ -35,7 +35,7 @@ namespace Clock
 			this.Weekdays = other.Weekdays;
 			this.Filename = other.Filename;
 			this.Message = other.Message;
-            Console.WriteLine($"CopyConstructor:{this.GetHashCode()}");
+			Console.WriteLine($"CopyConstructor:{this.GetHashCode()}");
 		}
 
 		public override string ToString()
@@ -50,6 +50,19 @@ namespace Clock
 			info += $"{Message}\t";
 			return info;
 		}
+		//public static bool operator ==(Alarm left, Alarm right)
+		//{
+		//	return
+		//		left.Date == right.Date &&
+		//		left.Time == right.Time &&
+		//		left.Weekdays == right.Weekdays &&
+		//		left.Filename == right.Filename &&
+		//		left.Message == right.Message;
+		//}
+		//public static bool operator !=(Alarm left, Alarm right)
+		//{
+		//	return !(left == right);
+		//}
 		//public static bool operator >(Alarm left, Alarm right)
 		//{
 		//	if (left.Date != DateTime.MinValue || right.Date != DateTime.MinValue)
