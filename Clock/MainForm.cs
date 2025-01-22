@@ -12,6 +12,7 @@ using System.IO;
 using System.Diagnostics;
 using Microsoft.Win32;
 using System.Runtime.CompilerServices;
+using AxWMPLib;
 
 namespace Clock
 {
@@ -103,6 +104,14 @@ namespace Clock
 			axWindowsMediaPlayer.settings.volume = 100;
 			axWindowsMediaPlayer.Ctlcontrols.play();
 			axWindowsMediaPlayer.Visible = true;
+		}
+		void SetPlayerInvisible(object sender,AxWMPLib._WMPOCXEvents_PlayStateChangeEvent e)
+		{
+			if (
+				axWindowsMediaPlayer.playState == WMPLib.WMPPlayState.wmppsMediaEnded ||
+				axWindowsMediaPlayer.playState == WMPLib.WMPPlayState.wmppsStopped
+				)
+				axWindowsMediaPlayer.Visible = false;
 		}
 
 		private void timer_Tick(object sender, EventArgs e)
